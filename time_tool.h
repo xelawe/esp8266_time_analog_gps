@@ -90,15 +90,14 @@ static void printDateTime(TinyGPSDate &d, TinyGPSTime &t)
 void check_time() {
   smartDelay(200);
 
-  //if (gps.age() < 500) {
- // if ( gps.date.isValid() && gps.time.isValid() && gps.date.isUpdated() ) {
+  if ( gps.date.isValid() && gps.time.isValid() && gps.date.isUpdated() ) {
     printDateTime(gps.date, gps.time);
     Serial.println();
     // set the Time to the latest GPS reading
-   // setTime(gps.time.hour(), gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
-   //adjustTime(offset * SECS_PER_HOUR);
+    setTime(gps.time.hour(), gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
+    //    adjustTime(offset * SECS_PER_HOUR);
 
- // }
+  }
 
   //  if ( timeStatus() != timeSet ) {
   //    if (SyncInt != 5) {

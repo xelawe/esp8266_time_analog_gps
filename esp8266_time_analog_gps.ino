@@ -78,7 +78,7 @@ void setup() {
 
   DebugPrintln("\n" + String(__DATE__) + ", " + String(__TIME__) + " " + String(__FILE__));
 
-  ClockA.init();
+ // ClockA.init();
 
   //wifi_init("ESPClockA");
 
@@ -88,18 +88,18 @@ void setup() {
 
   init_time();
 
-  if ( is_mem_valid() ) {
-    ClockA.set_time(rtcData.mem_time);
-  } else {
-    ClockA.init_time(now());
-  }
+ // if ( is_mem_valid() ) {
+ //   ClockA.set_time(rtcData.mem_time);
+  //} else {
+  //  ClockA.init_time(now());
+ // }
 
-  do_status();
+  //do_status();
   //do_sensor();
 
-  Alarm.timerRepeat(1,  tick);
-  Alarm.timerRepeat(60, do_status);
-  Alarm.timerRepeat(600, do_sensor);
+ // Alarm.timerRepeat(1,  tick);
+//  Alarm.timerRepeat(60, do_status);
+ // Alarm.timerRepeat(600, do_sensor);
 
 }
 
@@ -111,5 +111,5 @@ void loop() {
 
   //check_ota();
 
-  Alarm.delay(10);
+ // Alarm.delay(10);
 }

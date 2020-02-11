@@ -35,12 +35,11 @@ TimeChangeRule *tcr;        //pointer to the time change rule, use to get TZ abb
 static void smartDelay(unsigned long ms)
 {
   unsigned long start = millis();
-  // do
-  // {
-  while (ss.available())
-    gps.encode(ss.read());
-  // }  while (millis() - start < ms);
-  delay(200);
+  do {
+    while (ss.available())
+      gps.encode(ss.read());
+  }  while (millis() - start < ms);
+  //delay(200);
 }
 
 
@@ -83,7 +82,7 @@ static void printDateTime(TinyGPSDate &d, TinyGPSTime &t)
   }
 
   printInt(d.age(), d.isValid(), 5);
-  //smartDelay(0);
+  smartDelay(0);
 }
 
 
@@ -92,12 +91,14 @@ void check_time() {
   smartDelay(200);
 
   //if (gps.age() < 500) {
-  if ( gps.date.isValid() && gps.time.isValid()) {
+ // if ( gps.date.isValid() && gps.time.isValid() && gps.date.isUpdated() ) {
+    printDateTime(gps.date, gps.time);
+    Serial.println();
     // set the Time to the latest GPS reading
-    setTime(gps.time.hour(), gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
-    //adjustTime(offset * SECS_PER_HOUR);
+   // setTime(gps.time.hour(), gps.time.minute(), gps.time.second(), gps.date.day(), gps.date.month(), gps.date.year());
+   //adjustTime(offset * SECS_PER_HOUR);
 
-  }
+ // }
 
   //  if ( timeStatus() != timeSet ) {
   //    if (SyncInt != 5) {
@@ -118,10 +119,8 @@ void init_time() {
   DebugPrintln("Starting GPSTime");
   ss.begin(GPSBaud);
 
-  check_time();
-  
   while (timeStatus() == timeNotSet) { // wait until the time is set by the sync provider
-    delay(2000);
+    check_time();
   }
 
   //reset_drift();

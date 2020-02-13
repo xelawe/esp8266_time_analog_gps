@@ -22,11 +22,11 @@ void do_status() {
   //  printDateTime(gps.date, gps.time);
 }
 
-void tick() {
+void tick_tst() {
   DebugPrintln("Tick!" );
 }
 
-void tick_bak( ) {
+void tick( ) {
   int diff_sec;
   // time set?
   if ( timeStatus() != timeNotSet ) {
@@ -79,7 +79,7 @@ void setup() {
   // if ( is_mem_valid() ) {
   //   ClockA.set_time(rtcData.mem_time);
   //} else {
-  //  ClockA.init_time(now());
+ ClockA.init_time(now());
   // }
 
   do_status();

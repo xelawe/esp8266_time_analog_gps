@@ -26,12 +26,14 @@ void tick( ) {
     if ( diff_sec > 86400 ) {
       DebugPrintln("Diff " + String(diff_sec) + " seconds" );
       do_status();
-    } else {
-      diff_sec = ClockA.adjust_time( now() );
-      if (diff_sec != 0) {
-        DebugPrintln("Diff Adjust" + String(diff_sec) + " seconds" );
-      }
+    } // else { --> differences > 1 day will be handled in ClogAnalog class
+    
+    diff_sec = ClockA.adjust_time( now() );
+    if (diff_sec != 0) {
+      DebugPrintln("Diff Adjust" + String(diff_sec) + " seconds" );
     }
+    
+    //}
 
   }
 
